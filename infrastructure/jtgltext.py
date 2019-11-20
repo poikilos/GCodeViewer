@@ -4,7 +4,11 @@ import ctypes
 import os
 import logging
 
-from shader_loader import ShaderLoader
+try:
+    from shader_loader import ShaderLoader
+except ModuleNotFoundError:
+    from infrastructure.shader_loader import ShaderLoader
+
 from PIL import Image
 
 

@@ -4,8 +4,14 @@ import os
 import ctypes
 import time
 
-from shader_loader import ShaderLoader
-from numpy_gcode_reader import NumpyGcodeReader
+try:
+    from shader_loader import ShaderLoader
+except ModuleNotFoundError:
+    from infrastructure.shader_loader import ShaderLoader
+try:
+    from numpy_gcode_reader import NumpyGcodeReader
+except ModuleNotFoundError:
+    from infrastructure.numpy_gcode_reader import NumpyGcodeReader
 
 
 class JTObjects(object):

@@ -1,7 +1,9 @@
 import wx
 import logging
-from gcode_display import GcodeDisplayPanel
-
+try:
+    from gcode_display import GcodeDisplayPanel
+except ModuleNotFoundError:
+    from ui.gcode_display import GcodeDisplayPanel
 
 class App(wx.App):
     def __init__(self, path):
