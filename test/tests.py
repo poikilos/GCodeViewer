@@ -1,13 +1,13 @@
-# Test Runner
-
 import unittest
 import os
 import sys
 
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'src', ))
+test_path = os.path.join(os.path.dirname(__file__))
+sys.path.insert(0, os.path.join(test_path, '..', 'src'))
+sys.path.insert(0, test_path)
+print("Test path: %s" % test_path)
 
 loader = unittest.TestLoader()
-test_path = os.path.join(os.path.dirname(__file__), 'test')
 suite = loader.discover(test_path, pattern='*test.py')
 
 runner = unittest.TextTestRunner(verbosity=2)

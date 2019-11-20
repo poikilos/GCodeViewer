@@ -3,7 +3,7 @@ import argparse
 import os
 import sys
 
-from ui.app import ViewerApp
+from ui.app import App
 
 
 def setup_logging(args):
@@ -43,5 +43,5 @@ if __name__ == "__main__":
     else:
         path = os.path.dirname(os.path.realpath(__file__))
 
-    app = ViewerApp(path)
+    app = App(path)
     app.MainLoop()

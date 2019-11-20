@@ -1,9 +1,9 @@
 import wx
 import logging
-from main import DisplayPanel
+from gcode_display import GcodeDisplayPanel
 
 
-class ViewerApp(wx.App):
+class App(wx.App):
     def __init__(self, path):
         logging.info('Starting Application')
         self.frame = None
@@ -13,7 +13,7 @@ class ViewerApp(wx.App):
     def setup_menu(self):
         menuBar = wx.MenuBar()
         menu = wx.Menu()
-        menu_open_item = menu.Append(-1, "&Open Folder\tCtrl-O", "Open Folder")
+        menu_open_item = menu.Append(-1, "&Open File\tCtrl-O", "Open File")
         menu_exit_item = menu.Append(wx.ID_EXIT, "E&xit\tCtrl-Q", "Exit")
 
         self.Bind(wx.EVT_MENU, self.OnOpen, menu_open_item)
@@ -37,7 +37,7 @@ class ViewerApp(wx.App):
         self.frame.Bind(wx.EVT_CLOSE, self.OnCloseFrame)
         sizer = wx.BoxSizer(wx.VERTICAL)
         logging.debug("Starting display panel")
-        display_panel = DisplayPanel(self.frame)
+        display_panel = GcodeDisplayPanel(self.frame)
         logging.debug("Display panel started")
         sizer.Add(display_panel, 1, wx.EXPAND | wx.ALL)
         self.frame.SetSizer(sizer)
@@ -49,11 +49,7 @@ class ViewerApp(wx.App):
         return True
 
     def OnOpen(self, event):
-        openFolderDialog = wx.DirDialog(self.window, "Open Wave folder", style=wx.DD_DEFAULT_STYLE | wx.DD_NEW_DIR_BUTTON)
-
-        if openFolderDialog.ShowModal() == wx.ID_CANCEL:
-            return
-        self.window.load_folder(openFolderDialog.GetPath())
+        pass
 
     def OnExitApp(self, evt):
         self.frame.Close(True)
