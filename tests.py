@@ -1,3 +1,10 @@
+#!/usr/bin/env python
+import unittest
+import test.all_tests
+testSuite = test.all_tests.create_test_suite()
+text_runner = unittest.TextTestRunner().run(testSuite)
+
+'''
 import unittest
 import os
 import sys
@@ -37,3 +44,4 @@ result = runner.run(suite)
 problems = len(result.errors) + len(result.failures)
 print("\nProblems: %s\n" % problems)
 exit(problems)
+'''

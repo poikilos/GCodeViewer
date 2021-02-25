@@ -10,41 +10,10 @@ except ImportError:
 import time
 
 scriptDir = os.path.dirname(os.path.realpath(__file__))
-testDir = os.path.dirname(scriptDir)
-assert(os.path.isfile(os.path.join(testDir, "tests.py")))
-repoDir = os.path.dirname(testDir)
-infrDir = os.path.join(repoDir, 'infrastructure')
-testInfrDir = os.path.join(testDir, 'infrastructure')
+repoDir = os.path.dirname(scriptDir)
+testDir = os.path.join(repoDir, "test")
+assert(os.path.isdir(os.path.join(testDir, "test_data")))
 
-print("[shader_loaded_test.py]")
-print("scriptDir: %s" % scriptDir)
-assert(os.path.isdir(scriptDir))
-# sys.path.insert(0, scriptDir)
-print("testDir: %s" % testDir)
-assert(os.path.isdir(testDir))
-sys.path.insert(0, testDir)
-# ^ It has a copy of infrastructure with tests not infrastructure.
-
-print("repoDir: %s" % repoDir)
-assert(os.path.isdir(repoDir))
-sys.path.insert(0, repoDir)
-# ^ it needs the real infrastructure module in order to import
-#   numpy_gcode_reader
-
-print("infrDir: %s" % infrDir)
-assert(os.path.isdir(infrDir))
-# sys.path.insert(0, infrDir)
-badInfrFile = os.path.join(infrDir, "shader_loader_test.py")
-testInfrFile = os.path.join(testInfrDir, "shader_loader_test.py")
-assert(not os.path.isfile(badInfrFile))
-assert(os.path.isfile(testInfrFile))
-assert(not os.path.isfile(badInfrFile))
-
-print("cwd: %s" % os.getcwd())
-print("path:")
-for path in sys.path:
-    print(path)
-print("")
 from infrastructure.numpy_gcode_reader import NumpyGcodeReader
 
 
@@ -57,7 +26,7 @@ class NumpyGcodeReaderTest(unittest.TestCase):
 
     def test_run_starts_run_loop_and_cancel(self):
         gcode_line = "G01 X0.00 Y0.00 E1 F100.0\n"
-        test_gcode = StringIO.StringIO(gcode_line * 100000)
+        test_gcode = StringIO(gcode_line * 100000)
         npgcr = NumpyGcodeReader(test_gcode)
         npgcr.start()
         self.assertEquals("Running", npgcr.state)
@@ -66,7 +35,7 @@ class NumpyGcodeReaderTest(unittest.TestCase):
 
     def test_run_starts_run_loop_and_complete(self):
         gcode_line = "G01 X0.00 Y0.00 E1 F100.0\n"
-        test_gcode = StringIO.StringIO(gcode_line)
+        test_gcode = StringIO(gcode_line)
         npgcr = NumpyGcodeReader(test_gcode)
         npgcr.start()
         time.sleep(0.1)
@@ -74,7 +43,7 @@ class NumpyGcodeReaderTest(unittest.TestCase):
 
     def test_get_current_should_return_state_and_arrays_of_points(self):
         gcode_line = "G01 X0.00 Y1.00 E1 F100.0\n"
-        test_gcode = StringIO.StringIO(gcode_line)
+        test_gcode = StringIO(gcode_line)
         npgcr = NumpyGcodeReader(test_gcode)
         npgcr.start()
         time.sleep(0.1)
