@@ -36,7 +36,7 @@ class App(wx.App):
         logging.debug("Initting")
         self.frame = wx.Frame(None,
                               id=-1,
-                              title="Peachy Audio Viewer",
+                              title="Peachy GCode Viewer",
                               pos=(0, 0),
                               style=wx.DEFAULT_FRAME_STYLE,
                               )
