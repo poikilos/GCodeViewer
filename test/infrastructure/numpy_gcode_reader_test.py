@@ -1,12 +1,50 @@
 import unittest
 import os
 import sys
-import StringIO
+try:
+    from StringIO import StringIO
+except ImportError:
+    # Python 3
+    # print("* using Python 3 io")
+    from io import StringIO
 import time
 
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', '..', 'src'))
+scriptDir = os.path.dirname(os.path.realpath(__file__))
+testDir = os.path.dirname(scriptDir)
+assert(os.path.isfile(os.path.join(testDir, "tests.py")))
+repoDir = os.path.dirname(testDir)
+infrDir = os.path.join(repoDir, 'infrastructure')
+testInfrDir = os.path.join(testDir, 'infrastructure')
 
+print("[shader_loaded_test.py]")
+print("scriptDir: %s" % scriptDir)
+assert(os.path.isdir(scriptDir))
+# sys.path.insert(0, scriptDir)
+print("testDir: %s" % testDir)
+assert(os.path.isdir(testDir))
+sys.path.insert(0, testDir)
+# ^ It has a copy of infrastructure with tests not infrastructure.
+
+print("repoDir: %s" % repoDir)
+assert(os.path.isdir(repoDir))
+sys.path.insert(0, repoDir)
+# ^ it needs the real infrastructure module in order to import
+#   numpy_gcode_reader
+
+print("infrDir: %s" % infrDir)
+assert(os.path.isdir(infrDir))
+# sys.path.insert(0, infrDir)
+badInfrFile = os.path.join(infrDir, "shader_loader_test.py")
+testInfrFile = os.path.join(testInfrDir, "shader_loader_test.py")
+assert(not os.path.isfile(badInfrFile))
+assert(os.path.isfile(testInfrFile))
+assert(not os.path.isfile(badInfrFile))
+
+print("cwd: %s" % os.getcwd())
+print("path:")
+for path in sys.path:
+    print(path)
+print("")
 from infrastructure.numpy_gcode_reader import NumpyGcodeReader
 
 
