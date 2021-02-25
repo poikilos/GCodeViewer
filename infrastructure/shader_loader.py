@@ -1,4 +1,7 @@
 import logging
+import OpenGL
+OpenGL.FORWARD_COMPATIBLE_ONLY = True
+# ^ See http://pyopengl.sourceforge.net/documentation/deprecations.html
 import OpenGL.GL as gl
 
 

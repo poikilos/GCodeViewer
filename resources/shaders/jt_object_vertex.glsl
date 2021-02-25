@@ -1,4 +1,6 @@
-#version 330 core
+// #version 330 core
+#version 310 es
+precision mediump float;
 
 in vec4 vPosisition;
 in vec4 vColor;
@@ -10,7 +12,7 @@ uniform mat4 vCamera;
 
 void main(){
     vec4 newColor;
-    mat4 thisone = mat4( 
+    mat4 thisone = mat4(
         1.0,    0.0,    0.0,    0.0,
         0.0,    1.0,    0.0,    0.0,
         0.0,    0.0,    1.0,    0.0,

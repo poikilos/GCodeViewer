@@ -1,4 +1,6 @@
-#version 330 core
+// #version 330 core
+#version 310 es
+precision mediump float;
 
 in vec4 color;
 in vec2 texCoord;

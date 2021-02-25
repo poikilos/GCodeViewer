@@ -1,3 +1,6 @@
+import OpenGL
+OpenGL.FORWARD_COMPATIBLE_ONLY = True
+# ^ See http://pyopengl.sourceforge.net/documentation/deprecations.html
 import OpenGL.GL as gl
 import numpy as np
 import ctypes
@@ -47,7 +50,7 @@ class JTGLText(object):
 
     def _load_font_texture(self, location):
         im = Image.open(location)
-        image = im.tostring("raw", "RGBA", 0, -1)
+        image = im.tobytes("raw", "RGBA", 0, -1)
         texture_id = gl.glGenTextures(1)
         gl.glActiveTexture(gl.GL_TEXTURE1)
         gl.glBindTexture(gl.GL_TEXTURE_2D, texture_id)

@@ -2,6 +2,9 @@ import unittest
 import os
 import sys
 from mock import patch, mock_open
+import OpenGL
+OpenGL.FORWARD_COMPATIBLE_ONLY = True
+# ^ See http://pyopengl.sourceforge.net/documentation/deprecations.html
 import OpenGL.GLUT as glut
 import OpenGL.GL as gl
 
