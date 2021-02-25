@@ -1,9 +1,17 @@
 import wx
 import logging
-try:
-    from gcode_display import GcodeDisplayPanel
-except ModuleNotFoundError:
-    from ui.gcode_display import GcodeDisplayPanel
+#try:
+# try:
+#     from gcode_display import GcodeDisplayPanel
+# except ModuleNotFoundError:
+#     from ui.gcode_display import GcodeDisplayPanel
+from ui.gcode_display import GcodeDisplayPanel
+
+#except NameError as ex:
+#    print(ex)
+#    if "'ModuleNotFoundError' is not defined" in str(ex):
+#        print("Python 3 is required.")
+#    exit(1)
 
 class App(wx.App):
     def __init__(self, path):

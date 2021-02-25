@@ -1,10 +1,12 @@
 import wx
 import wx.lib.newevent
 
-try:
-    from glcanvas import GLCanvas
-except ModuleNotFoundError:
-    from ui.glcanvas import GLCanvas
+#try:
+#    from glcanvas import GLCanvas
+#except ImportError:
+#    print(ex)
+#    from ui.glcanvas import GLCanvas
+from ui.glcanvas import GLCanvas
 
 import logging
 
