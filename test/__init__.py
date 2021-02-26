@@ -8,7 +8,7 @@
 import infrastructure
 
 # import the infrastructure module
-from infrastructure import infrastructure
+from infrastructure import numpy_gcode_reader
 
 # or an object inside the infrastructure module
 from infrastructure.numpy_gcode_reader import NumpyGcodeReader
