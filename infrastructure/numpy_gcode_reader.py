@@ -51,7 +51,12 @@ class NumpyGcodeReader(threading.Thread):
 
     def _run_loop(self):
         try:
-            self._process_command(self._file_handle.next())
+            try:
+                self._process_command(self._file_handle.__next__())
+            except AttributeError as ex:
+                if "object has no attribute '__next__'" in str(ex):
+                    # python 2
+                    self._process_command(self._file_handle.next())
         except StopIteration:
             self.state = "Complete"
             self._running = False
@@ -60,7 +65,7 @@ class NumpyGcodeReader(threading.Thread):
         self.commands_processed +=1
         details = command.split(' ')
         if details[0] in ["G0", "G00", "G1", "G01"]:
-            
+
             next_move = list(self._current_posisition)
             next_color = self.colors['Move']
 
