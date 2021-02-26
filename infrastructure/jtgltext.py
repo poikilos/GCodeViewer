@@ -1,3 +1,4 @@
+from __future__ import division
 import OpenGL
 OpenGL.FORWARD_COMPATIBLE_ONLY = True
 # ^ See http://pyopengl.sourceforge.net/documentation/deprecations.html
@@ -140,5 +141,5 @@ class JTGLText(object):
         gl.glVertexAttribPointer(vColor, 4, gl.GL_FLOAT, gl.GL_FALSE, 0, ctypes.c_void_p(self.text_size * 4))
         gl.glVertexAttribPointer(vTexCoord, 2, gl.GL_FLOAT, gl.GL_FALSE, 0, ctypes.c_void_p((self.text_size+self.color_size) * 4))
 
-        gl.glDrawArrays(gl.GL_TRIANGLES, 0, self.text_size / 2)
+        gl.glDrawArrays(gl.GL_TRIANGLES, 0, self.text_size // 2)
         gl.glDisable(gl.GL_BLEND)

@@ -1,3 +1,4 @@
+from __future__ import division
 import OpenGL
 OpenGL.FORWARD_COMPATIBLE_ONLY = True
 # ^ See http://pyopengl.sourceforge.net/documentation/deprecations.html
@@ -111,7 +112,7 @@ class JTObjects(object):
         gl.glVertexAttribPointer(vPosisition, 4, gl.GL_FLOAT, gl.GL_FALSE, 0, None)
         gl.glVertexAttribPointer(vColor, 4, gl.GL_FLOAT, gl.GL_FALSE, 0, ctypes.c_void_p(self.grid_size * 4))
 
-        gl.glDrawArrays(gl.GL_TRIANGLES, 0, self.grid_size / 4)
+        gl.glDrawArrays(gl.GL_TRIANGLES, 0, self.grid_size // 4)
 
     def init_gcode_object(self,):
         self.gcode_vao = gl.glGenVertexArrays(1)
@@ -170,4 +171,4 @@ class JTObjects(object):
         gl.glVertexAttribPointer(vPosisition, 4, gl.GL_FLOAT, gl.GL_FALSE, 0, None)
         gl.glVertexAttribPointer(vColor, 4, gl.GL_FLOAT, gl.GL_FALSE, 0, ctypes.c_void_p(self.gcode_size * 4))
 
-        gl.glDrawArrays(gl.GL_LINES, 0, self.gcode_size / 4)
+        gl.glDrawArrays(gl.GL_LINES, 0, self.gcode_size // 4)
